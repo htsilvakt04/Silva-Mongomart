@@ -200,10 +200,20 @@ function CartDAO(database) {
             userId: userId,
             items: []
         }
-        var dummyItem = this.createDummyItem();
-        dummyItem.quantity = quantity;
-        userCart.items.push(dummyItem);
-        callback(userCart);
+        var query;
+        if (quantity == 0) {
+            query = { "$pull": { items: { _id: itemId } } };
+        } else {
+            query = { "$set": { "items.$.quantity": quantity } };
+        }
+        // cause you did known that the cart did have this item so the next step is
+        // 1. find the item is this card by using userId
+        // 2. update the quantity accordingly
+        this.db.collection('cart').findOneAndUpdate({userId: userId, "items._id": itemId}, query, {returnOriginal: false}, function (err, docs) {
+            assert.equal(null, err);
+            userCart.items = docs.value.items.concat([]);
+            callback(userCart);
+        });
 
         // TODO-lab7 Replace all code above (in this method).
 
