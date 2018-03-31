@@ -73,7 +73,6 @@ function ItemDAO(database) {
         var categories = [];
 
         col.forEach(function (docs) {
-            console.log('ahihi', docs);
             categories.push(docs);
         }, function (err) {
             assert.equal(null, err);
@@ -168,7 +167,7 @@ function ItemDAO(database) {
     }
 
 
-    this.searchItems = function(query, page, itemsPerPage, callback) {
+    this.searchItems = function(searchText, page, itemsPerPage, callback) {
         "use strict";
 
         /*
@@ -194,26 +193,28 @@ function ItemDAO(database) {
          * description. You should simply do this in the mongo shell.
          *
          */
-
-        var item = this.createDummyItem();
         var items = [];
-        for (var i=0; i<5; i++) {
-            items.push(item);
-        }
+        var query = {
+            $text: {$search: searchText}
+        };
 
-        // TODO-lab2A Replace all code above (in this method).
+        var cursor = this.db.collection('item').find(query);
+        cursor.skip(itemsPerPage * page);
+        cursor.sort({_id: 1});
+        cursor.limit(itemsPerPage);
 
-        // TODO Include the following line in the appropriate
-        // place within your code to pass the items for the selected page
-        // of search results to the callback.
-        callback(items);
+        cursor.forEach(function (docs) {
+            items.push(docs);
+        }, function (err) {
+            assert.equal(null, err);
+            callback(items);
+        })
+
     }
 
 
-    this.getNumSearchItems = function(query, callback) {
+    this.getNumSearchItems = function(searchText, callback) {
         "use strict";
-
-        var numItems = 0;
 
         /*
         * TODO-lab2B
@@ -227,8 +228,22 @@ function ItemDAO(database) {
         * a SINGLE text index on title, slogan, and description. You should
         * simply do this in the mongo shell.
         */
+        var items = [];
+        var query = {
+            $text: {$search: searchText}
+        };
 
-        callback(numItems);
+        var cursor = this.db.collection('item').find(query);
+        cursor.project({
+            _id: 1
+        });
+
+        cursor.forEach(function (docs) {
+            items.push(docs);
+        }, function (err) {
+            assert.equal(null, err);
+            callback(items.length);
+        })
     }
 
 
