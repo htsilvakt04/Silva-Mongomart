@@ -151,19 +151,9 @@ function ItemDAO(database) {
             query = {}
         }
 
-        var cursor = this.db.collection('item').find(query);
-        cursor.project({_id: 1});
-
-        cursor.forEach(function (docs) {
-            numItems.push(docs);
-        }, function (err) {
-            assert.equal(null, err);
-            callback(numItems.length);
+        this.db.collection('item').find(query).count(function (err, count) {
+            callback(count);
         });
-
-         // TODO: make all the select stuff use index
-
-
     }
 
 
@@ -194,9 +184,13 @@ function ItemDAO(database) {
          *
          */
         var items = [];
-        var query = {
-            $text: {$search: searchText}
-        };
+        var query;
+
+        if (searchText.trim() == "") {
+            query = {};
+        } else {
+            query = { "$text": {"$search": searchText} };
+        }
 
         var cursor = this.db.collection('item').find(query);
         cursor.skip(itemsPerPage * page);
@@ -228,22 +222,18 @@ function ItemDAO(database) {
         * a SINGLE text index on title, slogan, and description. You should
         * simply do this in the mongo shell.
         */
-        var items = [];
-        var query = {
-            $text: {$search: searchText}
-        };
+        var query;
 
-        var cursor = this.db.collection('item').find(query);
-        cursor.project({
-            _id: 1
-        });
+        if (searchText.trim() == "") {
+            query = {};
+        } else {
+            query = { "$text": {"$search": searchText} };
+        }
 
-        cursor.forEach(function (docs) {
-            items.push(docs);
-        }, function (err) {
+        this.db.collection('item').find(query).count(function (err, count) {
             assert.equal(null, err);
-            callback(items.length);
-        })
+            callback(count);
+        });
     }
 
 
@@ -259,15 +249,20 @@ function ItemDAO(database) {
          * _id and pass the matching item to the callback function.
          *
          */
+        var item;
+        var query = {
+            _id: itemId
+        }
 
-        var item = this.createDummyItem();
+        var cursor = this.db.collection('item').find(query);
+        cursor.limit(1);
+        cursor.forEach(function (doc) {
+            item = doc;
+        }, function (err) {
+            assert.equal(null, err);
+            callback(item);
+        })
 
-        // TODO-lab3 Replace all code above (in this method).
-
-        // TODO Include the following line in the appropriate
-        // place within your code to pass the matching item
-        // to the callback.
-        callback(item);
     }
 
 
