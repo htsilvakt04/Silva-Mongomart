@@ -42,15 +42,19 @@ function CartDAO(database) {
             userId: userId,
             items: []
         }
-        var dummyItem = this.createDummyItem();
-        userCart.items.push(dummyItem);
 
-        // TODO-lab5 Replace all code above (in this method).
+        var query = {
+            userId: userId
+        }
 
-        // TODO Include the following line in the appropriate
-        // place within your code to pass the userCart to the
-        // callback.
-        callback(userCart);
+        this.db.collection('cart').find(query).limit(1).next(function (err, cart) {
+            assert.equal(null, err);
+            assert.ok(cart);
+
+            userCart.items = cart.items;
+            callback(userCart);
+        })
+
     }
 
 
@@ -81,10 +85,28 @@ function CartDAO(database) {
          * how cart.itemInCart is used in the mongomart.js app.
          *
          */
+        var itemGetBack = null;
+        var pipe = [
+            {$match: {userId: userId}},
+            {$project: {
+                _id: 0,
+                items: {
+                    $filter: {
+                        input: "$items",
+                        as: "item",
+                        cond: {$eq: ["$$item._id", itemId]}
+                    }
+                }
+            }}
+        ];
 
-        callback(null);
-
-        // TODO-lab6 Replace all code above (in this method).
+        var cursor = this.db.collection('cart').aggregate(pipe);
+        cursor.next(function (err, docs) {
+            if (docs.items.length > 0) {
+                itemGetBack = docs.items[0];
+            }
+            callback(itemGetBack);
+        });
     }
 
 

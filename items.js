@@ -280,7 +280,6 @@ function ItemDAO(database) {
 
     this.addReview = function(itemId, comment, name, stars, callback) {
         "use strict";
-
         /*
          * TODO-lab4
          *
@@ -292,7 +291,9 @@ function ItemDAO(database) {
          * "name", "comment", "stars", and "date".
          *
          */
-
+        if (name.trim() === '' || comment.trim() === '' || typeof stars !== 'number') {
+            return;
+        }
         var reviewDoc = {
             name: name,
             comment: comment,
@@ -300,15 +301,19 @@ function ItemDAO(database) {
             date: Date.now()
         }
 
-        // TODO replace the following two lines with your code that will
-        // update the document with a new review.
-        var doc = this.createDummyItem();
-        doc.reviews = [reviewDoc];
 
-        // TODO Include the following line in the appropriate
-        // place within your code to pass the updated doc to the
-        // callback.
-        callback(doc);
+        var query = {
+            _id: itemId
+        }
+        var collection = this.db.collection('item');
+
+        collection.updateOne(query, {
+            $push: {reviews: reviewDoc}
+        }).then(function (response) {
+            assert.equal(1, response.result.n);
+            callback(reviewDoc);
+        });
+
     }
 
 

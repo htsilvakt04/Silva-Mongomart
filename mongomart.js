@@ -127,7 +127,6 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
         var itemId = parseInt(req.params.itemId);
 
         items.getItem(itemId, function(item) {
-            console.log(item);
 
             if (item == null) {
                 res.status(404).send("Item not found.");
@@ -154,7 +153,6 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
 
             items.getRelatedItems(function(relatedItems) {
 
-                console.log(relatedItems);
                 res.render("item",
                            {
                                userId: USERID,
@@ -230,6 +228,8 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
         };
 
         cart.itemInCart(userId, itemId, function(item) {
+            // if item doesn't exist... then assign the quantity to 1 and then render like normal
+
             if (item == null) {
                 items.getItem(itemId, function(item) {
                     item.quantity = 1;
@@ -238,7 +238,7 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
                     });
             
                 });
-            } else {
+            } else { // item did exist then update the quantity
                 cart.updateQuantity(userId, itemId, item.quantity+1, function(userCart) {
                     renderCart(userCart);
                 });
