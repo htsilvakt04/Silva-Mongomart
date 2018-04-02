@@ -1,5 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux';
+import CategoryList from './homepage/CategoryList';
+import LeftBreadcrum from './homepage/LeftBreadcrum';
+import ListItem from './homepage/ListItem';
+
+
 import {handleInitialData} from '../actions/init';
 
 class App extends React.Component {
@@ -9,7 +14,11 @@ class App extends React.Component {
 
     render () {
         return (
-            <div>App</div>
+            <div>
+                <LeftBreadcrum/>
+                <CategoryList/>
+                <ListItem/>
+            </div>
         )
 
     }
