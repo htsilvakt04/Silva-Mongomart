@@ -13,26 +13,24 @@ class App extends React.Component {
     }
 
     render () {
-        let {categories} = this.props;
-        let categoriesLength = Object.keys(categories).length;
-
-        if (categoriesLength < 1) {
+        if (this.props.loading) {
             return <h3>Loading</h3>
         }
+
         return (
             <div>
                 <LeftBreadcrum/>
-                <CategoryList categories={categories}/>
+                <CategoryList/>
                 <ListItem/>
             </div>
         )
 
     }
 }
-function mapStateToProps(state) {
-    let {categories} = state;
-    return {
-        categories
+
+function mapStateToProps({categories, items}) {
+    return { // checking the app is loading or not
+        loading:  Object.keys(categories).length < 1 && Object.keys(items).length < 1
     }
 }
 export default connect(mapStateToProps)(App);

@@ -62,7 +62,7 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
     
     var router = express.Router();
 
-    // react api
+    // ------------------- REACT API ----------------------------------//
 
     router.get('/api/category/:name', function (req, res) {
         let categoryName = req.params.name;
@@ -70,6 +70,21 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
             return res.json(categories);
         })
     });
+
+    // get items for : go though pages + when selecting the category
+    router.get('/api/items', function (req, res) {
+        let {category, skip, limit} = req.query;
+        items.getItems(category, skip, limit, function(pageItems) {
+            return res.json(pageItems);
+        })
+    });
+
+
+    // get items for search bar:
+
+
+
+
     // Homepage
     router.get("/", function(req, res) {
         "use strict";

@@ -8,3 +8,7 @@ export function formatCategories(categories) {
         return category;
     }, {});
 }
+
+export function formatItems(items) {
+    return items;
+}

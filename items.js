@@ -90,9 +90,8 @@ function ItemDAO(database) {
     }
 
 
-    this.getItems = function(category, page, itemsPerPage, callback) {
+    this.getItems = function(category, skip, limit, callback) {
         "use strict";
-
         /*
          * TODO-lab1B
          *
@@ -114,19 +113,19 @@ function ItemDAO(database) {
          * than you do for other categories.
          *
          */
-        var query = {
+        let query = {
             category: category
         };
 
         if (category === 'All') {
             query = {}
         }
-        var pageItems = [];
+        let pageItems = [];
 
-        var cursor = this.db.collection('item').find(query);
+        let cursor = this.db.collection('item').find(query);
         cursor.sort({_id: 1});
-        cursor.skip(itemsPerPage * page);
-        cursor.limit(itemsPerPage)
+        cursor.skip(Number(skip));
+        cursor.limit(Number(limit));
 
         cursor.forEach(function (docs) {
             pageItems.push(docs);
