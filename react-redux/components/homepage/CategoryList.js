@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ITEM} from '../../actions/items';
-import {PAGE} from '../../actions/page';
+
+import {handleChangeItemAndPage} from '../../actions/share';
 
 class CategoryList extends React.Component {
     state = {
@@ -12,11 +12,9 @@ class CategoryList extends React.Component {
         this.setState((state) => ({clickedItem: id}));
 
         this.props.dispatch(
-            ITEM.change(id)
+            handleChangeItemAndPage(id)
         )
-        this.props.dispatch(
-            PAGE.change(1)
-        )
+
     }
     render () {
         let {categories} = this.props;
