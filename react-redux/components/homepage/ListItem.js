@@ -1,48 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Items from './ListItem.js-Children/Items';
+import Pagination from './ListItem.js-Children/Pagination';
 
-function Pagination(props) {
-    let {perPage, currentPage, total} = props;
-
-    let numberOfPages = 1;
-    if (total > perPage) {
-        numberOfPages = Math.ceil(total / perPage);
-    }
-
-    let pages = [];
-    for (let i = 1; i <= numberOfPages; i++) {
-       pages.push (
-            <li key={i} className={currentPage === i ? 'active' : 'inactive'}>
-                <a>{i}</a>
-            </li>
-       )
-    }
-
-    return (
-        <div className="row text-center">
-            <div className="col-lg-12">
-                <ul className="pagination">
-                    {pages}
-                </ul>
-            </div>
-        </div>
-    )
-}
 class ListItem extends React.Component {
-    state = {
-        currentPage: 1
-    }
-    perPage = 5;
+    perPage = 5 // if we want, can move this var to the store's state as well
 
     render () {
-        let total = this.props.total;
-        let currentPage = this.state.currentPage;
+        let {total, page} = this.props;
 
         return (
             <div className="col-md-10">
-                <Items />
-                <Pagination total={total} perPage={this.perPage} currentPage={currentPage}/>
+                <Items perPage={this.perPage}/>
+                <Pagination perPage={this.perPage}/>
                 <div className="text-center">
                     <i>{total} Products</i>
                 </div>
@@ -51,7 +21,7 @@ class ListItem extends React.Component {
     }
 }
 
-function mapStateToProps ({items}, currentProps) {
+function mapStateToProps ({items}) {
     return {
         total: Object.keys(items).length
     }

@@ -12,3 +12,10 @@ export function formatCategories(categories) {
 export function formatItems(items) {
     return items;
 }
+
+export function calculateItemsToDisplay(items, perPage, currentPage) {
+    let bottom = (currentPage - 1) * perPage;
+    let top =  perPage * currentPage;
+
+    return items.filter((item, index) => index >= bottom && index < top);
+}

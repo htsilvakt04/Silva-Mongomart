@@ -1,17 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {ITEM} from '../../actions/items';
+import {PAGE} from '../../actions/page';
 
 class CategoryList extends React.Component {
     state = {
         clickedItem: 'All'
     }
-    handleClick = function (event, id) {
+    handleClick =  (event, id) => {
         event.preventDefault();
         this.setState((state) => ({clickedItem: id}));
 
         this.props.dispatch(
             ITEM.change(id)
+        )
+        this.props.dispatch(
+            PAGE.change(1)
         )
     }
     render () {

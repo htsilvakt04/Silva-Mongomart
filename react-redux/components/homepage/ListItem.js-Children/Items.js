@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Fragment} from 'react';
+import {calculateItemsToDisplay} from '../../../utils/helpers';
 
 class Items extends React.Component {
     render () {
@@ -31,9 +32,12 @@ class Items extends React.Component {
         )
     }
 }
-function mapStateToProps ({items}) {
+
+function mapStateToProps ({items, page}, currentProps) {
+    let {perPage} = currentProps;
+    let passedItems = calculateItemsToDisplay(items, perPage, page);
     return {
-        items
+        items: passedItems
     }
 }
 export default connect(mapStateToProps)(Items);
