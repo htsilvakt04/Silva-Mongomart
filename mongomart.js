@@ -62,6 +62,14 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
     
     var router = express.Router();
 
+    // react api
+
+    router.get('/api/category/:name', function (req, res) {
+        let categoryName = req.params.name;
+        items.getCategories(function(categories) {
+            return res.json(categories);
+        })
+    });
     // Homepage
     router.get("/", function(req, res) {
         "use strict";

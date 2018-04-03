@@ -1,7 +1,10 @@
 export function isObject (item) {
-  return Object.prototype.toString.call(item) === '[object Object]'
+    return Object.prototype.toString.call(item) === '[object Object]'
 }
 
-export function getPercentage (count, total) {
-  return total === 0 ? 0 : parseInt(count / total * 100, 10)
+export function formatCategories(categories) {
+    return categories.reduce((category, key) => {
+        category[key._id] = key;
+        return category;
+    }, {});
 }

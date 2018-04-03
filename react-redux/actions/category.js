@@ -1,9 +1,10 @@
-export const GET_CATEGORY = 'GET_CATEGORY';
+export const GET_INIT_CATEGORY = 'GET_INIT_CATEGORY';
 
 export const CATEGORY = {
-    getAll: function () {
+    getInit: function (data) {
         return {
-            type: CATEGORY
+            type: GET_INIT_CATEGORY,
+            data
         }
     }
 }

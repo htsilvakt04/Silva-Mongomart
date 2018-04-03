@@ -1,28 +1,12 @@
-import {
-  _getUsers,
-} from './_DATA.js'
+import {getCategories} from './_DATA.js'
+import {formatCategories} from './helpers';
 
-
-
-function formatUsers (users) {
-  return Object.keys(users)
-    .reduce((formattedUsers, id) => {
-      const user = users[id]
-
-      formattedUsers[id] = {
-        ...user,
-        answers: Object.keys(user.answers)
-      }
-
-      return formattedUsers
-    }, {})
-}
 
 export function getInitialData () {
-  return Promise.all([
-    _getUsers(),
-  ]).then(([users]) => ({
-    users: formatUsers(users),
-  }))
+    return Promise.all([
+        getCategories('All')
+    ]).then(([categories]) => ({
+        categories: formatCategories(categories)
+    }))
 }
 

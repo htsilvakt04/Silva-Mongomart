@@ -5,6 +5,7 @@ class CategoryList extends React.Component {
         clickedItem: 'All'
     }
     render () {
+        
         let categories = [ { _id: 'Stickers', num: 2 },
             { _id: 'Umbrellas', num: 2 },
             { _id: 'Office', num: 2 },
