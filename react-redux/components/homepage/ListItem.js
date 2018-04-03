@@ -15,7 +15,7 @@ function Items (props) {
                        <h3><a href={'/item/' + id}>{item.title}</a></h3>
                        <h4>{item.slogan}</h4>
                        <p>{item.description}</p>
-                       <a className="btn btn-primary" href={'/item/' + id}>View Product <span className="glyphicon glyphicon-chevron-right">xxx</span></a>
+                       <a className="btn btn-primary" href={'/item/' + id}>View Product <span className="glyphicon glyphicon-chevron-right"></span></a>
                    </div>
                    <hr/>
                </div>
@@ -24,20 +24,37 @@ function Items (props) {
    )
 }
 function Pagination(props) {
+    let {perPage, currentPage, total} = props;
+
+    let numberOfPages = 1;
+    if (total > perPage) {
+        numberOfPages = Math.ceil(total / perPage);
+    }
+
+    let pages = [];
+    for (let i = 1; i <= numberOfPages; i++) {
+       pages.push (
+            <li key={i} className={currentPage === i ? 'active' : 'inactive'}>
+                <a>{i}</a>
+            </li>
+       )
+    }
+
     return (
         <div className="row text-center">
             <div className="col-lg-12">
                 <ul className="pagination">
-                    <li key='12' className="active">
-                        <a href="/}">1</a>
-                    </li>
+                    {pages}
                 </ul>
             </div>
         </div>
     )
 }
 class ListItem extends React.Component {
-
+    state = {
+        currentPage: 1
+    }
+    perPage = 5;
     render () {
         let items = [
             {
@@ -80,12 +97,15 @@ class ListItem extends React.Component {
                 ]
             }
         ];
+        let total = items.length;
+        let currentPage = this.state.currentPage;
+
         return (
             <div className="col-md-10">
                 <Items items={items} />
-                <Pagination />
+                <Pagination total={total} perPage={this.perPage} currentPage={currentPage}/>
                 <div style={{textAlign: 'center'}}>
-                    <i>{items.length} Products</i>
+                    <i>{total} Products</i>
                 </div>
             </div>
         );
