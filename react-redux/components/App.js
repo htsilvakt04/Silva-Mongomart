@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import {Fragment} from 'react';
 import {connect} from 'react-redux';
 import CategoryList from './homepage/CategoryList';
 import LeftBreadcrum from './homepage/LeftBreadcrum';
 import ListItem from './homepage/ListItem';
-
+import Navbar from './shared/navbar';
 
 import {handleInitialData} from '../actions/init';
 
@@ -18,11 +19,14 @@ class App extends React.Component {
         }
 
         return (
-            <div>
-                <LeftBreadcrum/>
-                <CategoryList/>
-                <ListItem/>
-            </div>
+            <Fragment>
+                <Navbar/>
+                <div  className="container">
+                    <LeftBreadcrum/>
+                    <CategoryList/>
+                    <ListItem/>
+                </div>
+            </Fragment>
         )
 
     }

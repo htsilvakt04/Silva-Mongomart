@@ -19,7 +19,7 @@ class Pagination extends React.Component {
         for (let i = 1; i <= numberOfPages; i++) {
             pages.push (
                 <li key={i} onClick={this.handleChangePage.bind(this, i)} className={ page === i ? 'active' : 'inactive'}>
-                    <a>{i}</a>
+                    <a style={{cursor: 'pointer'}}>{i}</a>
                 </li>
             )
         }
