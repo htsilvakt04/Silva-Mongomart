@@ -307,7 +307,7 @@ MongoClient.connect(url, function(err, db) {
     app.use('/', router);
 
     // Start the server listening
-    var server = app.listen(3000, function() {
+    var server = app.listen(process.env.port, function() {
         var port = server.address().port;
         console.log('Mongomart server listening on port %s.', port);
     });
