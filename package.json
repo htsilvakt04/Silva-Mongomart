@@ -8,6 +8,7 @@
     },
     "scripts": {
         "start": "webpack -p && node mongomart.js && SET NODE_ENV=production",
+        "dev": "webpack -p && node mongomart.js && SET NODE_ENV=production",
         "build": "SET NODE_ENV=production && webpack -p",
         "silva": "webpack --watch --progress",
         "deploy": "npm run build && firebase deploy",

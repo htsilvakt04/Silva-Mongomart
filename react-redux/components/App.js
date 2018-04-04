@@ -5,6 +5,7 @@ import CategoryList from './homepage/CategoryList';
 import LeftBreadcrum from './homepage/LeftBreadcrum';
 import ListItem from './homepage/ListItem';
 import Navbar from './shared/navbar';
+import Loading from './shared/Loading';
 
 import {handleInitialData} from '../actions/init';
 
@@ -15,7 +16,11 @@ class App extends React.Component {
 
     render () {
         if (this.props.loading) {
-            return <h3>Loading</h3>
+            return (
+                <div  className="container">
+                    <Loading style={{color: '#00D1B2', textAlign: 'center', fontSize: '45px'}} intervalTime="200"/>
+                </div>
+            )
         }
 
         return (
