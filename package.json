@@ -7,7 +7,7 @@
         "node": "8.9.4"
     },
     "scripts": {
-        "start": "node mongomart.js && SET NODE_ENV=production && webpack -p",
+        "start": "webpack -p && node mongomart.js && SET NODE_ENV=production",
         "build": "SET NODE_ENV=production && webpack -p",
         "silva": "webpack --watch --progress",
         "deploy": "npm run build && firebase deploy",
