@@ -310,5 +310,8 @@ MongoClient.connect(url, function(err, db) {
         var port = server.address().port;
         console.log('Mongomart server listening on port %s.', port);
     });
-
+    var http = require("http");
+    setInterval(function() {
+        http.get("http://<your app name>.herokuapp.com");
+    }, 600000); // every 10 minutes (300000
 });
