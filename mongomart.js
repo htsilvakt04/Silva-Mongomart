@@ -14,6 +14,7 @@
   limitations under the License.
 */
 require('dotenv').config();
+require('newrelic');
 var express = require('express'),
     bodyParser = require('body-parser'),
     nunjucks = require('nunjucks'),
