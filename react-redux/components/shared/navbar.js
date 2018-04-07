@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {handlechangeBySearch} from '../../actions/items';
 
 class Navbar extends React.Component {
@@ -26,13 +27,20 @@ class Navbar extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="/" style={{color: '#fff'}}>MongoMart</a>
+                        <Link className="navbar-brand" to="/" style={{color: '#fff'}}>MongoMart</Link>
                     </div>
-                    <form className="navbar-form navbar-left" onChange={this.handleSearch} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
-                        <div className="form-group">
-                            <input type="text" value={this.state.search}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
-                        </div>
-                    </form>
+                    {this.props.location.pathname.indexOf('/item') === -1
+                        ? <form className="navbar-form navbar-left" onChange={this.handleSearch} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
+                            <div className="form-group">
+                                <input type="text" value={this.state.search}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
+                            </div>
+                          </form>
+                        : <form className="navbar-form navbar-left" onChange={this.moveUserToHomePage} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
+                            <div className="form-group">
+                                <input type="text" value={this.state.search}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
+                            </div>
+                        </form>
+                    }
                     <ul className="nav navbar-nav navbar-right">
                         <li>
                             <a href="/cart" style={{color: '#fff'}}>
@@ -43,6 +51,9 @@ class Navbar extends React.Component {
                 </div>
             </nav>
         )
+    }
+    moveUserToHomePage = () => {
+        this.props.history.push('/');
     }
 }
 export default connect()(Navbar);
