@@ -10,12 +10,48 @@ export function formatCategories(categories) {
 }
 
 export function formatItems(items) {
-    return items;
+    return items.reduce((item, key) => {
+        item[key._id] = key;
+        return item
+    }, {});
 }
 
 export function calculateItemsToDisplay(items, perPage, currentPage) {
     let bottom = (currentPage - 1) * perPage;
     let top =  perPage * currentPage;
+    let arr = [];
+    Object.keys(items).map((key, index) => {
+        let item = items[key];
+        if (index >= bottom && index < top) {
+            arr.push(item)
+        }
+    });
+    return arr;
+}
 
-    return items.filter((item, index) => index >= bottom && index < top);
+export function calculateItemByCat(origin, catName) {
+    let result = [];
+    Object.keys(origin).forEach( item => {
+        if (origin[item].category === catName) {
+            result.push(origin[item])
+        }
+    });
+    return result;
+}
+
+export function calculateItemBySearch(origin, search) {
+    let searchReg = new RegExp(search, 'i');
+    let result = [];
+    Object.keys(origin).forEach( key => {
+        let item = origin[key];
+        let {title, slogan, description, category} = item;
+        if (title.search(searchReg) >= 0 || slogan.search(searchReg) >= 0 || description.search(searchReg) >= 0 || category.search(searchReg) >= 0) {
+            result.push(item);
+        }
+    });
+    return result.reduce((item, key) => {
+        item[key._id] = key;
+        return item;
+    }, {});
+
 }

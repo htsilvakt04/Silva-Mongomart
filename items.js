@@ -290,6 +290,8 @@ function ItemDAO(database) {
          * "name", "comment", "stars", and "date".
          *
          */
+        stars = Number(stars);
+        itemId = Number(itemId);
         if (name.trim() === '' || comment.trim() === '' || typeof stars !== 'number') {
             return;
         }
@@ -300,19 +302,18 @@ function ItemDAO(database) {
             date: Date.now()
         }
 
-
         var query = {
             _id: itemId
         }
         var collection = this.db.collection('item');
-
         collection.updateOne(query, {
             $push: {reviews: reviewDoc}
         }).then(function (response) {
             assert.equal(1, response.result.n);
             callback(reviewDoc);
+        }).catch(function (err) {
+            callback(err);
         });
-
     }
 
 

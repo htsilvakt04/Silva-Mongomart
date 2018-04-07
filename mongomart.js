@@ -14,6 +14,7 @@
   limitations under the License.
 */
 require('dotenv').config();
+var xss = require("xss");
 require('newrelic');
 var express = require('express'),
     bodyParser = require('body-parser'),
@@ -30,7 +31,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(bodyParser.json());
 
 /*
  Configure nunjucks to work with express
@@ -78,11 +79,18 @@ MongoClient.connect(url, function(err, db) {
             return res.json(pageItems);
         })
     });
+    // add review for item
+    router.post("/api/item/:itemId/reviews", function(req, res) {
+        "use strict";
+        let itemId = xss(parseInt(req.params.itemId));
+        let review = xss(req.body.review);
+        let name = xss(req.body.name);
+        let stars = xss(parseInt(req.body.stars));
 
-
-    // get items for search bar:
-
-
+        items.addReview(itemId, review, name, stars, function(itemDoc) {
+            return res.json(itemDoc);
+        });
+    });
 
 
     // Homepage

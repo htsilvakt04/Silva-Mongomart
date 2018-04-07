@@ -1,28 +1,60 @@
-import {GET_INIT_ITEM, CHANGE_ITEM_BY_CAT, CHANGE_ITEM_BY_SEARCH} from '../actions/items';
-let origin = [];
-export default function items (state = [], action) {
+import {GET_INIT_ITEM, CHANGE_ITEM_BY_CAT, CHANGE_ITEM_BY_SEARCH, ADD_REVIEW} from '../actions/items';
+import {calculateItemByCat, calculateItemBySearch} from '../utils/helpers';
+import moment from 'moment';
+let origin;
+export default function items (state = {}, action) {
     let {type} = action;
 
     switch (type) {
         case GET_INIT_ITEM:
-            origin = origin.concat(action.data);
+            origin = action.data;
             return action.data;
-
         case CHANGE_ITEM_BY_CAT:
             let catName = action.id;
+
             if (catName === 'All') {
                 return origin;
             }
-            return origin.filter(item => item.category === catName);
+
+            let result = calculateItemByCat(origin, catName);
+
+            return result.reduce((item, key) => {
+                item[key._id] = key;
+                return item;
+            }, {});
+
         case CHANGE_ITEM_BY_SEARCH:
             let {search} = action;
-            let searchReg = new RegExp(search, 'i');
+            return search === '' ? origin : calculateItemBySearch(origin, search);
+        case ADD_REVIEW:
+            let {id, ...data} = action.data;
+            let item = state[id];
+            let formatedData = {
+                name: data.name,
+                comment: data.review,
+                stars: data.stars,
+                data: moment().valueOf()
+            }
+            if (item.reviews) {
+                return {
+                    ...state,
+                    [id]: {
+                        ...item,
+                        reviews: item.reviews.concat(formatedData)
+                    }
+                }
+            }
 
-            return search === '' ? origin :origin.filter( item => {
-                let {title, slogan, description, category} = item;
-                return title.search(searchReg) >= 0 || slogan.search(searchReg) >= 0 || description.search(searchReg) >= 0 || category.search(searchReg) >= 0;
-            });
+            return {
+                ...state,
+                [id]: {
+                    ...item,
+                    reviews: [formatedData]
+                }
+            }
+
         default:
             return state
     }
 }
+

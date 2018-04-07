@@ -36,6 +36,6 @@ class Pagination extends React.Component {
 
 }
 function mapStateToProps ({page, items}) {
-    return {page, total: items.length};
+    return {page, total: Object.keys(items).length};
 }
 export default connect(mapStateToProps)(Pagination);

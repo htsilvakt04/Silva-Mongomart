@@ -18,3 +18,11 @@ export function getCategories(name) {
         return axios.get(url).then(({data}) => res(data)).catch(err => rej(err));
     })
 }
+
+export function _addReview({review, name ,stars, id}) {
+    let url = '/api/item/' + id  + '/reviews';
+
+    return axios.post(url, {
+        review, name, stars
+    }).then(({data}) => data).catch(err => err);
+}

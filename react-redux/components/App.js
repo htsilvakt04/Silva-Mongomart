@@ -1,13 +1,13 @@
-import React from 'react';
-import {Fragment} from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
-import CategoryList from './homepage/CategoryList';
-import LeftBreadcrum from './homepage/LeftBreadcrum';
-import ListItem from './homepage/ListItem';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Navbar from './shared/navbar';
 import Loading from './shared/Loading';
-
+import HomePage from './homepage/HomePage';
+import ItemDetail from './itemDetail/itemDetail';
 import {handleInitialData} from '../actions/init';
+import ScrollToTopRoute from './shared/ScrollToTopRoute';
 
 class App extends React.Component {
     componentDidMount () {
@@ -24,14 +24,21 @@ class App extends React.Component {
         }
 
         return (
-            <Fragment>
-                <Navbar/>
-                <div  className="container">
-                    <LeftBreadcrum/>
-                    <CategoryList/>
-                    <ListItem/>
-                </div>
-            </Fragment>
+            <BrowserRouter>
+                <Route render={ ({ location }) => (
+                    <div>
+                        <Navbar/>
+                        <TransitionGroup>
+                            <CSSTransition key={location.key} classNames="fade" timeout={300}>
+                                <Switch location={location}>
+                                    <ScrollToTopRoute exact path="/" component={HomePage}/>
+                                    <ScrollToTopRoute path="/item/:id" component={ItemDetail}/>
+                                </Switch>
+                            </CSSTransition>
+                        </TransitionGroup>
+                    </div>
+                )} />
+            </BrowserRouter>
         )
 
     }
