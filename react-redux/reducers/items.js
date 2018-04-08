@@ -12,13 +12,14 @@ export default function items (state = {}, action) {
             return action.data;
         case CHANGE_CAT:
             let catName = action.name;
+            let newState = Object.assign({}, origin, state);
 
             if (catName === 'All') {
-                return origin;
+                return newState;
             }
 
-            let result = calculateItemByCat(origin, catName);
-
+            let result = calculateItemByCat(newState, catName);
+            origin = newState;
             return result.reduce((item, key) => {
                 item[key._id] = key;
                 return item;
