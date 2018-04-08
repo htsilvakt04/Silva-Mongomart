@@ -6,7 +6,6 @@ class Item extends React.Component {
         let reviews = item.reviews;
         let {stars} = this.calculateRating(item);
 
-        console.log('total stars: ', stars);
         let arrStars = [];
         for (let index = 1; index <= stars; index ++) {
             arrStars.push(<span key={index} className="glyphicon glyphicon-star"></span>);

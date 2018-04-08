@@ -25,9 +25,9 @@ class App extends React.Component {
 
         return (
             <BrowserRouter>
-                <Route render={ ({ location }) => (
+                <Route render={ ({ location, history }) => (
                     <div>
-                        <Navbar/>
+                        <Navbar location={location} history={history}/>
                         <TransitionGroup>
                             <CSSTransition key={location.key} classNames="fade" timeout={300}>
                                 <Switch location={location}>

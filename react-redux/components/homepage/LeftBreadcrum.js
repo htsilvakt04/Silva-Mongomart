@@ -1,14 +1,16 @@
 import React from 'react';
-
-function LeftBreadcrum ()  {
-    return (
-        <div className="row">
-            <div className="col-md-12">
-                <ol className="breadcrumb">
-                    <li><a href="/">Home</a></li>
-                </ol>
-            </div>
-        </div>
-    )
+import {Link} from 'react-router-dom';
+class LeftBreadcrum extends React.Component {
+   render () {
+       return (
+           <div className="row">
+               <div className="col-md-12">
+                   <ol className="breadcrumb">
+                       <li><Link to="/">Home</Link></li>
+                   </ol>
+               </div>
+           </div>
+       )
+   }
 }
 export default LeftBreadcrum;
