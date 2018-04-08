@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ITEM} from '../../actions/items';
+import {CATEGORY} from '../../actions/category';
+
 class Breadcrum extends React.Component {
     render () {
         let item = this.props.item;
@@ -20,7 +21,7 @@ class Breadcrum extends React.Component {
     handleChangeCat = (cat) => {
         let {dispatch} = this.props;
         dispatch(
-            ITEM.change(cat)
+            CATEGORY.change(cat)
         )
     }
 }

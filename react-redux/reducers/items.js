@@ -1,4 +1,5 @@
-import {GET_INIT_ITEM, CHANGE_ITEM_BY_CAT, CHANGE_ITEM_BY_SEARCH, ADD_REVIEW} from '../actions/items';
+import {GET_INIT_ITEM, CHANGE_ITEM_BY_SEARCH, ADD_REVIEW} from '../actions/items';
+import {CHANGE_CAT} from '../actions/category';
 import {calculateItemByCat, calculateItemBySearch} from '../utils/helpers';
 import moment from 'moment';
 let origin;
@@ -9,8 +10,8 @@ export default function items (state = {}, action) {
         case GET_INIT_ITEM:
             origin = action.data;
             return action.data;
-        case CHANGE_ITEM_BY_CAT:
-            let catName = action.id;
+        case CHANGE_CAT:
+            let catName = action.name;
 
             if (catName === 'All') {
                 return origin;

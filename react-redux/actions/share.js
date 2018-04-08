@@ -1,10 +1,10 @@
-import {ITEM} from './items';
+import {CATEGORY} from './category';
 import {PAGE} from './page';
 
-export function handleChangeItemAndPage(itemId) {
+export function handleChangeCat(itemId) {
     return (dispatch) => {
         dispatch(
-            ITEM.change(itemId)
+            CATEGORY.change(itemId)
         )
         dispatch(
             PAGE.change(1)

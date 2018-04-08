@@ -38,7 +38,6 @@ function mapStateToProps ({items, page}, currentProps) {
     let {perPage} = currentProps;
     let passedItems = calculateItemsToDisplay(items, perPage, page);
 
-    console.log('pass Items', passedItems);
     return {
         items: passedItems
     }
