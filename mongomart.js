@@ -313,7 +313,6 @@ MongoClient.connect(url, function(err, db) {
     
     // Use the router routes in our application
     app.use('/', router);
-
     // Start the server listening
     var server = app.listen(process.env.PORT, function() {
         var port = server.address().port;
