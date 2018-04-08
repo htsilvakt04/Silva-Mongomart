@@ -8,8 +8,7 @@
   },
   "scripts": {
     "start": "node mongomart.js && SET NODE_ENV=production",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
-    "dev": "webpack -p && node mongomart.js && SET NODE_ENV=production",
+    "postinstall": "webpack -p --config ./webpack.config.js --progress",
     "build": "SET NODE_ENV=production && webpack -p",
     "silva": "webpack --watch --progress",
     "deploy": "npm run build && firebase deploy",

@@ -5,7 +5,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Navbar from './shared/navbar';
 import Loading from './shared/Loading';
 import HomePage from './homepage/HomePage';
-import ItemDetail from './itemDetail/itemDetail';
+import ItemDetail from './ItemDetail/ItemDetail';
 import {handleInitialData} from '../actions/init';
 import ScrollToTopRoute from './shared/ScrollToTopRoute';
 
