@@ -3,4 +3,4 @@ The project comes from the idea of Mongomart (MongoDB), but this version is diff
 
 1. clone
 2. npm install
-3. enjoy
+3. node mongmomart.js
