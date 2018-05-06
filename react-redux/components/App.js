@@ -15,13 +15,13 @@ class App extends React.Component {
     }
 
     render () {
-        if (this.props.loading) {
+/*if (this.props.loading) {
             return (
                 <div  className="container">
                     <Loading style={{color: '#00D1B2', textAlign: 'center', fontSize: '45px'}} intervalTime={200}/>
                 </div>
             )
-        }
+        }*/
 
         return (
             <BrowserRouter>
@@ -44,9 +44,9 @@ class App extends React.Component {
     }
 }
 
-function mapStateToProps({categories, items}) {
-    return { // checking the app is loading or not
-        loading:  Object.keys(categories).length < 1 && Object.keys(items).length < 1
-    }
-}
-export default connect(mapStateToProps)(App);
+// function mapStateToProps({categories, items}) {
+//     return { // checking the app is loading or not
+//         loading:  Object.keys(categories).length < 1 && Object.keys(items).length < 1
+//     }
+// }
+export default connect()(App);

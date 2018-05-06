@@ -6,7 +6,7 @@ import Pagination from './ListItem.js-Children/Pagination';
 class ListItem extends React.Component {
     perPage = 5 // if we want, can move this var to the store's state as well
 
-    render () {
+    render () {/*
         let {total, page} = this.props;
 
         return (
@@ -17,13 +17,14 @@ class ListItem extends React.Component {
                     <i>{total} Products</i>
                 </div>
             </div>
-        );
+        );*/
+        return <h2>xxx</h2>;
     }
 }
 
 function mapStateToProps ({items}) {
     return {
-        total: Object.keys(items).length
+        total: 15// TODO: Object.keys(items).length
     }
 }
 export default connect(mapStateToProps)(ListItem);

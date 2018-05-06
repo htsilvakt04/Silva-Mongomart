@@ -14,6 +14,7 @@ class CategoryList extends React.Component {
 
     }
     render () {
+/*
         let {categories, currentCat} = this.props;
         return (
             <div className="col-md-2">
@@ -32,15 +33,16 @@ class CategoryList extends React.Component {
                     })}
                 </div>
             </div>
-        )
+        )*/
+        return <h2>xxx</h2>;
     }
 }
 
-function mapStateToProps({categories, currentCat}) {
-    return {
-        categories,
-        currentCat
-    }
-}
+// TODO: function mapStateToProps({categories, currentCat}) {
+//     return {
+//         categories,
+//         currentCat
+//     }
+// }
 
-export default connect(mapStateToProps)(CategoryList);
+export default connect()(CategoryList);
