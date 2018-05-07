@@ -17,3 +17,7 @@ const byCat = (state = {}, action) => {
 }
 
 export default byCat;
+
+export const getItemsIds = (state, cat) => {
+    return state[cat];
+}

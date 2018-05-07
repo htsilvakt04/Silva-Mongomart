@@ -1,7 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {Fragment} from 'react';
-import {calculateItemsToDisplay} from '../../../utils/helpers';
 import {Link} from 'react-router-dom';
 
 class Items extends React.Component {
@@ -34,12 +32,4 @@ class Items extends React.Component {
     }
 }
 
-function mapStateToProps ({items, page}, currentProps) {
-    let {perPage} = currentProps;
-    let passedItems = calculateItemsToDisplay(items, perPage, page);
-
-    return {
-        items: passedItems
-    }
-}
-export default connect(mapStateToProps)(Items);
+export default Items;
