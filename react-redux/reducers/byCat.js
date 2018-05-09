@@ -9,8 +9,9 @@ const byCat = (state = {}, action) => {
                 if (!isExists) init[obj.category] = [];
 
                 init[obj.category].push(obj._id);
+                init.All.push(obj._id);
                 return init;
-            }, {});
+            }, {All: []});
         default:
             return state;
     }

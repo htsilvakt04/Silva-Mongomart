@@ -6,10 +6,7 @@ const AUTHED_ID = 'tylermcginnis'; // we can get it from cookies (session ID)
 export function handleInitialData () {
     return (dispatch) => {
         getInitialData()
-            .then(({categories, items}) => {
-                dispatch(
-                    CATEGORY.getInit(categories)
-                );
+            .then(({items}) => {
                 dispatch(ITEM.getInit(items));
             })
             .catch((err) => {
