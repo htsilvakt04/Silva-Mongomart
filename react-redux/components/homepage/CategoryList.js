@@ -1,48 +1,52 @@
+const queryString = require('query-string');
 import React from 'react';
 import {connect} from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
+import { getCatNameAndTotal } from '../../reducers';
 import {handleChangeCat} from '../../actions/share';
 
 class CategoryList extends React.Component {
     handleClick =  (event, id) => {
         event.preventDefault();
         this.setState((state) => ({clickedItem: id}));
-
-        this.props.dispatch(
-            handleChangeCat(id)
-        )
-
+        this.props.changeCat(id);
     }
     render () {
-/*
         let {categories, currentCat} = this.props;
         return (
             <div className="col-md-2">
                 <div className="list-group">
-                    {Object.keys(categories).map( key => {
-                        let {_id, num} = categories[key];
-
-                        return (
-                            <a key={_id} onClick={(event) => this.handleClick(event, _id)} className={currentCat === _id ? 'list-group-item active' : 'list-group-item inactive'}>
-                                {_id}
-                                <span className="badge">
-                                    {num}
-                                </span>
-                            </a>
-                        )
-                    })}
+                {Object.keys(categories).map( key => {
+                    let {name, num} = categories[key];
+                    
+                    return (
+                        <a key={name} onClick={(event) => this.handleClick(event, name)} className={currentCat === name ? 'list-group-item active' : 'list-group-item inactive'}>
+                            {name}
+                            <span className="badge">
+                                {num}
+                            </span>
+                        </a>
+                    )
+                })}
                 </div>
             </div>
-        )*/
-        return <h2>xxx</h2>;
+        )
     }
 }
 
-// TODO: function mapStateToProps({categories, currentCat}) {
-//     return {
-//         categories,
-//         currentCat
-//     }
-// }
+function mapStateToProps(state, { location }) {
+    const currentCat = queryString.parse(location.search).cat || 'All';
 
-export default connect()(CategoryList);
+    return {
+        categories: getCatNameAndTotal(state),
+        currentCat
+    }
+}
+function mapDispatchToProps (dispatch) {
+    return {
+        changeCat: (id) => {
+            dispatch(handleChangeCat(id))
+        }
+    }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryList));

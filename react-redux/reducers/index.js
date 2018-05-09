@@ -12,4 +12,7 @@ export const getItemsByCat = (state, cat) => {
             : fromByIds.getItems(state.byIds, fromByCat.getItemsIds(state.byCat, cat));
 }
 
+export const getCatNameAndTotal = (state) =>
+    fromByCat.getCatNameAndTotal(state.byCat)
+
 

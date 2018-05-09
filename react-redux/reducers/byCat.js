@@ -22,3 +22,8 @@ export default byCat;
 export const getItemsIds = (state, cat) => {
     return state[cat];
 }
+
+export const getCatNameAndTotal = (state) =>
+    Object.keys(state).map( catName => {
+        return {name: catName, num: state[catName].length};
+    })
