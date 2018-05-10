@@ -9,11 +9,11 @@ import Pagination from './ListItem.js-Children/Pagination';
 
 class ListItem extends React.Component {
     render () {
-        let { total, items, page } = this.props;
+        let { total, items, page, perPage } = this.props;
         return (
             <div className="col-md-10">
                 <Items items={items}/>
-                <Pagination page={page} total={total} perPage={this.perPage}/>
+                <Pagination page={page} total={total} perPage={perPage}/>
                 <div className="text-center">
                     <i>{total} Products</i>
                 </div>
@@ -34,6 +34,7 @@ function mapStateToProps (state, { location }) {
         items: passedItems,
         total: items.length,
         page,
+        perPage
     }
 }
 export default withRouter(connect(mapStateToProps)(ListItem));

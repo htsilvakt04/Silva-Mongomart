@@ -1,16 +1,11 @@
 const queryString = require('query-string');
 import React from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { getCatNameAndTotal } from '../../reducers';
-import {handleChangeCat} from '../../actions/share';
+import { PAGE } from '../../actions/page';
 
 class CategoryList extends React.Component {
-    handleClick =  (event, id) => {
-        event.preventDefault();
-        this.setState((state) => ({clickedItem: id}));
-        this.props.changeCat(id);
-    }
     render () {
         let {categories, currentCat} = this.props;
         return (
@@ -20,12 +15,12 @@ class CategoryList extends React.Component {
                     let {name, num} = categories[key];
                     
                     return (
-                        <a key={name} onClick={(event) => this.handleClick(event, name)} className={currentCat === name ? 'list-group-item active' : 'list-group-item inactive'}>
+                        <Link to={{pathname: '/', search: `?cat=${name}`}} key={name} onClick={() => this.props.changePage()} className={currentCat === name ? 'list-group-item active' : 'list-group-item inactive'}>
                             {name}
                             <span className="badge">
                                 {num}
                             </span>
-                        </a>
+                        </Link>
                     )
                 })}
                 </div>
@@ -44,8 +39,8 @@ function mapStateToProps(state, { location }) {
 }
 function mapDispatchToProps (dispatch) {
     return {
-        changeCat: (id) => {
-            dispatch(handleChangeCat(id))
+        changePage: () => {
+            dispatch(PAGE.change(1))
         }
     }
 }
