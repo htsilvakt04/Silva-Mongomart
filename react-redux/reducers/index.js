@@ -15,4 +15,8 @@ export const getItemsByCat = (state, cat) => {
 export const getCatNameAndTotal = (state) =>
     fromByCat.getCatNameAndTotal(state.byCat)
 
+export const getItemsById = (state, id) =>
+    fromByIds.getItemById(state.byIds, id)
+
+
 

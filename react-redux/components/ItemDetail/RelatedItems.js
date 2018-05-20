@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {calculateItemByCat} from '../../utils/helpers';
+import { getItemsByCat } from '../../reducers';
+
 class RelatedItems extends React.Component {
     render () {
         let {items} = this.props;
@@ -31,11 +32,11 @@ class RelatedItems extends React.Component {
     }
 }
 
-function mapStateToProps({items}, currentProps) {
+function mapStateToProps(state, currentProps) {
+    const cat = currentProps.cat;
     return {
-        items: calculateItemByCat(items, currentProps.cat)
+        items: getItemsByCat(state, cat)
     }
 }
-
 
 export default connect(mapStateToProps)(RelatedItems);

@@ -19,3 +19,4 @@ export default byIDs;
 
 export const getItems = (state, arrayIds) => arrayIds.map(id => state[id])
 export const getAll = (state) => Object.keys(state).map( id => state[id])
+export const getItemById = (state, id) => state[id]

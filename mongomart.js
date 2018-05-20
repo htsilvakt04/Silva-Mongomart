@@ -296,7 +296,10 @@ MongoClient.connect(url, function(err, db) {
                        });
         });
     });
-    
+
+    router.use('*', function (req, res) {
+        return res.redirect('/');
+    })
 
     function cartTotal(userCart) {
         "use strict";

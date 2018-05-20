@@ -1,5 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { getItemsById } from '../../reducers';
 import BreadCrum from './Breadcrum';
 import Heading from './Heading';
 import Item from './Item';
@@ -25,11 +27,11 @@ class ItemDetail extends React.Component {
         )
     }
 }
-function mapStateToProps({items}, currentProps) {
-    let id = Number(currentProps.match.params.id);
 
+function mapStateToProps(state, currentProps) {
+    const id = currentProps.match.params.id;
     return {
-        item: items[id]
+        item: getItemsById(state, id)
     }
 }
-export default connect(mapStateToProps)(ItemDetail);
+export default withRouter(connect(mapStateToProps)(ItemDetail));
