@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {handlechangeBySearch} from '../../actions/items';
+import { handleSearch } from '../../actions/items';
 
 class Navbar extends React.Component {
     state = {
@@ -11,9 +11,7 @@ class Navbar extends React.Component {
         let val = event.target.value;
         this.setState(() => ({search: val}));
 
-        this.props.dispatch(
-            handlechangeBySearch(val)
-        )
+        this.props.handleSearch(val);
         // dispatch here
     }
     render () {
@@ -56,4 +54,6 @@ class Navbar extends React.Component {
         this.props.history.push('/');
     }
 }
-export default connect()(Navbar);
+
+
+export default connect(null, { handleSearch })(Navbar);

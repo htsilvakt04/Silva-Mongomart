@@ -18,5 +18,8 @@ export const getCatNameAndTotal = (state) =>
 export const getItemsById = (state, id) =>
     fromByIds.getItemById(state.byIds, id)
 
+export const handleChangeBySearch = (state, val) =>
+    fromByIds.changeItemBySearch(state.byIds, val)
+
 
 

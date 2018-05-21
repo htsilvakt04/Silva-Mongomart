@@ -32,7 +32,7 @@ export const ITEM = {
     }
 }
 
-export function handlechangeBySearch(search) {
+export function handleSearch(search) {
     return (dispatch) => {
         dispatch(
             ITEM.changeBySearch(search)
