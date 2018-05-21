@@ -14,7 +14,7 @@
     "deploy": "npm run build && firebase deploy",
     "firebase-init": "firebase login && firebase init",
     "deploy-raw": "firebase deploy",
-    "test": "jest"
+    "test": "jest -e --watch"
   },
   "babel": {
     "presets": [

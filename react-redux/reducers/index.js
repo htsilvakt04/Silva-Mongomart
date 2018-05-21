@@ -6,10 +6,12 @@ import {combineReducers} from 'redux';
 
 export default combineReducers({byIds, byCat, currentPage});
 
-export const getItemsByCat = (state, cat) => {
-    return cat === 'All'
-            ? fromByIds.getAll(state.byIds)
-            : fromByIds.getItems(state.byIds, fromByCat.getItemsIds(state.byCat, cat));
+export const getItemsByCatAndFilter = (state, cat) => {
+    if (cat === 'All') {
+        return fromByIds.getAll(state.byIds, state.filterText)
+    } else {
+        return fromByIds.getItemsByFilter(state.byIds, state.filterText, fromByCat.getItemsIds(state.byCat, cat));
+    }
 }
 
 export const getCatNameAndTotal = (state) =>

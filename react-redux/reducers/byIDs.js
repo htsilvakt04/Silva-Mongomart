@@ -19,9 +19,9 @@ const byIDs = (state = {}, action) => {
 export default byIDs;
 
 export const getItems = (state, arrayIds) => arrayIds.map(id => state[id])
-export const getAll = (state) => Object.keys(state).map( id => state[id])
 export const getItemById = (state, id) => state[id]
-
+export const getAll = (state, filterText) => searchItemInState(state, filterText)
+export const getItemsByFilter = (state, filterText, arrayOfItemsId) => searchItemInState(state, filterText, arrayOfItemsId)
 
 export const changeItemBySearch = (state, searchText) =>
     searchItemInState(state, searchText);

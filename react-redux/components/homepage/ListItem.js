@@ -1,7 +1,7 @@
 const queryString = require('query-string');
 import { withRouter } from 'react-router-dom';
 import {calculateItemsToDisplay} from '../../utils/helpers';
-import { getItemsByCat } from '../../reducers';
+import { getItemsByCatAndFilter } from '../../reducers';
 import React from 'react';
 import {connect} from 'react-redux';
 import Items from './ListItem.js-Children/Items';
@@ -27,7 +27,7 @@ function mapStateToProps (state, { location }) {
 
     const page = state.currentPage;
     const currentCat = queryString.parse(location.search).cat || 'All';
-    const items = getItemsByCat(state, currentCat);
+    const items = getItemsByCatAndFilter(state, currentCat);
     const passedItems = calculateItemsToDisplay(items, perPage, page);
 
     return {

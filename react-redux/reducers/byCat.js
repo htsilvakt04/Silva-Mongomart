@@ -19,9 +19,7 @@ const byCat = (state = {}, action) => {
 
 export default byCat;
 
-export const getItemsIds = (state, cat) => {
-    return state[cat];
-}
+export const getItemsIds = (state, cat) => state[cat]
 
 export const getCatNameAndTotal = (state) =>
     Object.keys(state).map( catName => {
