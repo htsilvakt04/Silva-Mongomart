@@ -32,11 +32,12 @@ export const ITEM = {
     }
 }
 
-export function handleSearch(search) {
+export function handleSearch(input) {
     return (dispatch) => {
-        dispatch(
-            ITEM.changeBySearch(search)
-        )
+        dispatch({
+            type: 'UPDATE_USER_INPUT',
+            input
+        })
         dispatch(
             PAGE.change(1)
         )

@@ -1,7 +1,7 @@
 const queryString = require('query-string');
 import { withRouter } from 'react-router-dom';
 import {calculateItemsToDisplay} from '../../utils/helpers';
-import { getItemsByCatAndFilter } from '../../reducers';
+import { getItemsByCatAndFilter, getUserSearchText } from '../../reducers';
 import React from 'react';
 import {connect} from 'react-redux';
 import Items from './ListItem.js-Children/Items';
