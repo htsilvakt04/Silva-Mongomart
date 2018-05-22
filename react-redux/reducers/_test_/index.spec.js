@@ -1695,7 +1695,7 @@ describe('getItemsByCatAndFilter() function', () => {
                         18
                     ]
                 },
-                filterText: 'some weird ...'
+                userSearchText: 'some weird ...'
             };
             expectedResult = [];
             expect(getItemsByCatAndFilter(byIDsState, 'Umbrellas')).toEqual(expectedResult);
@@ -2127,7 +2127,7 @@ describe('getItemsByCatAndFilter() function', () => {
                         18
                     ]
                 },
-                filterText: 'mug'
+                userSearchText: 'mug'
             };
             expectedResult = [
                 {

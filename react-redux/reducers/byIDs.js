@@ -1,4 +1,4 @@
-import { searchItemInState } from './util';
+import { searchItemInState } from './utils/util';
 
 const byIDs = (state = {}, action) => {
     switch (action.type) {
@@ -10,6 +10,8 @@ const byIDs = (state = {}, action) => {
 
                 return init;
             }, {});
+        case 'ADD_REVIEW':
+            return byID(state, action);
 
         default:
             return state;

@@ -50,7 +50,6 @@ export function handleAddReview(data) {
             ITEM.addReview(data)
         )
         return addReview(data)
-            .then(data => {})
             .catch(err => {
                 alert('Opps, Can not add your review... please do it again');
                 // TODO: should remove review here

@@ -53,5 +53,17 @@ export function calculateItemBySearch(origin, search) {
         item[key._id] = key;
         return item;
     }, {});
+}
 
+export function generateHomePageLink() {
+    return {
+        pathname: '/',
+        search: `?cat=All`
+    }
+}
+export function generateHomePageWithCatLink(category) {
+    return {
+        pathname: '/',
+        search: `?cat=${category}`
+    }
 }
