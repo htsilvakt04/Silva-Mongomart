@@ -1,5 +1,5 @@
 const userSearchText = (state = '', action) => {
-    if(!action.input) return state;
+    if(action.input === undefined) return state;
     switch (action.type) {
         case 'UPDATE_USER_INPUT':
             return action.input;

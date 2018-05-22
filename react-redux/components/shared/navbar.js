@@ -1,18 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { getUserSearchText } from '../../reducers';
 import { handleSearch } from '../../actions/items';
 
 class Navbar extends React.Component {
-    state = {
-        search: ''
-    }
     handleSearch = (event) => {
         let val = event.target.value;
-        this.setState(() => ({search: val}));
-
-        this.props.handleSearch(val);
         // dispatch here
+        this.props.handleSearch(val);
     }
     render () {
         return (
@@ -28,14 +24,14 @@ class Navbar extends React.Component {
                         <Link className="navbar-brand" to="/" style={{color: '#fff'}}>MongoMart</Link>
                     </div>
                     {this.props.location.pathname.indexOf('/item') === -1
-                        ? <form className="navbar-form navbar-left" onChange={this.handleSearch} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
+                        ? <form className="navbar-form navbar-left" onKeyUp={this.handleSearch} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
                             <div className="form-group">
-                                <input type="text" value={this.state.search}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
+                                <input type="text" value={this.props.searchText}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
                             </div>
                           </form>
-                        : <form className="navbar-form navbar-left" onChange={this.moveUserToHomePage} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
+                        : <form className="navbar-form navbar-left" onKeyUp={this.moveUserToHomePage} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
                             <div className="form-group">
-                                <input type="text" value={this.state.search}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
+                                <input type="text" value={this.props.searchText}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
                             </div>
                         </form>
                     }
@@ -55,5 +51,9 @@ class Navbar extends React.Component {
     }
 }
 
-
+function mapStateToProps(state) {
+    return {
+        searchText: getUserSearchText(state)
+    }
+}
 export default connect(null, { handleSearch })(Navbar);
