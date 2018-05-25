@@ -24,10 +24,10 @@ export const ITEM = {
             search
         }
     },
-    addReview: function (data) {
+    addReview: function (review) {
         return {
             type: ADD_REVIEW,
-            data
+            review
         }
     }
 }

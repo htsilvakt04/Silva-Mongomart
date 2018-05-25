@@ -31,7 +31,7 @@ class App extends React.Component {
                         <TransitionGroup>
                             <CSSTransition key={location.key} classNames="fade" timeout={300}>
                                 <Switch location={location}>
-                                    <ScrollToTopRoute exact path="/item/:id" component={ItemDetail}/>
+                                    <ScrollToTopRoute path="/item/:id" component={ItemDetail}/>
                                     <ScrollToTopRoute path="/:cat?" component={HomePage}/>
                                     <Route render={() => <h1>404</h1>}/>
                                 </Switch>
