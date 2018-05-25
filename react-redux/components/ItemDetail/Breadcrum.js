@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { handleChangeCat } from '../../actions';
 import { generateHomePageLink, generateHomePageWithCatLink } from '../../utils/helpers';
 
+
 const Breadcrum = ({ item, handleChangeCat }) => {
     return (
         <div className="row">

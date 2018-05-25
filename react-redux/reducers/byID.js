@@ -13,9 +13,9 @@ const byID = (state = {}, action) => {
             const id = action.review.id;
             return {
                 [id]: {
-                    ...state[id],
+                    ...state,
                     reviews: [
-                        ...state[id].reviews,
+                        ...state.reviews,
                         reviewToAdd
                     ]
                 }
