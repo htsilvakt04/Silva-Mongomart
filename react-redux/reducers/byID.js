@@ -11,11 +11,12 @@ const byID = (state = {}, action) => {
         case 'ADD_REVIEW':
             const reviewToAdd = hydrateData(action.review);
             const id = action.review.id;
+            const prevReviews = state.reviews || [];
             return {
                 [id]: {
                     ...state,
                     reviews: [
-                        ...state.reviews,
+                        ...prevReviews,
                         reviewToAdd
                     ]
                 }
