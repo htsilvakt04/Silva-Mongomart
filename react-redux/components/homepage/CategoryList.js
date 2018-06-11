@@ -9,7 +9,7 @@ class CategoryList extends React.Component {
     render () {
         let {categories, currentCat} = this.props;
         return (
-            <div className="col-md-2">
+            <div className="col-md-2 hidden-xs">
                 <div className="list-group">
                 {Object.keys(categories).map( key => {
                     let {name, num} = categories[key];

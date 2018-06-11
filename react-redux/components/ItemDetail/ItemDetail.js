@@ -14,15 +14,13 @@ class ItemDetail extends React.Component {
         let {item} = this.props;
         return (
            <div className="container">
-                <div className="row">
-                    <BreadCrum item={item}/>
-                    <Heading item={item}/>
-                    <Item item={item}/>
-                    <LatestReview item={item}/>
-                    <CommentForm item={item}/>
-                    <hr/>
-                    <RelatedItems cat={item.category}/>
-                </div>
+                <BreadCrum item={item}/>
+                <Heading item={item}/>
+                <Item item={item}/>
+                <LatestReview item={item}/>
+                <CommentForm item={item}/>
+                <hr/>
+                <RelatedItems cat={item.category}/>
            </div>
         )
     }

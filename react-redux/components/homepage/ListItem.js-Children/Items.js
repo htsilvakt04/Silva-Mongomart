@@ -18,7 +18,7 @@ class Items extends React.Component {
                                 </Link>
                             </div>
                             <div className="col-md-5">
-                                <h3><a href={'item/' + id}>{item.title}</a></h3>
+                                <h3><Link to={'item/' + id}>{item.title}</Link></h3>
                                 <h4>{item.slogan}</h4>
                                 <p>{item.description}</p>
                                 <Link className="btn btn-primary" to={'item/' + id}>View Product <span className="glyphicon glyphicon-chevron-right"></span></Link>

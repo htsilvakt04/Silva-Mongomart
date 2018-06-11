@@ -14,34 +14,28 @@ class Navbar extends React.Component {
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div className="container">
-                    <div className="navbar-header">
-                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span className="sr-only">Toggle navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
-                        <Link className="navbar-brand" to="/" style={{color: '#fff'}}>MongoMart</Link>
+                    <div className="row">
+                        <div className="navbar-header col-xs-3 col-md-2">
+                            <Link className="navbar-brand" to="/" style={{color: '#fff', fontSize: 'inherit'}}>MongoMart</Link>
+                        </div>
+                        <div className="col-xs-6">
+                            {this.props.location.pathname.indexOf('/item') === -1
+                                ? <form className="navbar-form" onKeyUp={this.handleSearch}>
+                                    <input type="text" value={this.props.searchText}  className="form-control" placeholder="Search" style={{width: '100%'}}/>
+                                </form>
+                                : <form className="navbar-form" onKeyUp={this.moveUserToHomePage}>
+                                    <input type="text" value={this.props.searchText}  className="form-control" placeholder="Search" style={{width: '100%'}}/>
+                                </form>
+                            }
+                        </div>
+                        <ul className="nav navbar-nav navbar-right col-xs-3">
+                            <li>
+                                <a href="/cart" style={{color: '#fff'}}>
+                                    <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    {this.props.location.pathname.indexOf('/item') === -1
-                        ? <form className="navbar-form navbar-left" onKeyUp={this.handleSearch} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
-                            <div className="form-group">
-                                <input type="text" value={this.props.searchText}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
-                            </div>
-                          </form>
-                        : <form className="navbar-form navbar-left" onKeyUp={this.moveUserToHomePage} style={{float: 'none', width: '400px', marginLeft: '12em'}}>
-                            <div className="form-group">
-                                <input type="text" value={this.props.searchText}  className="form-control" placeholder="Search" style={{width: '400px'}}/>
-                            </div>
-                        </form>
-                    }
-                    <ul className="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="/cart" style={{color: '#fff'}}>
-                                <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         )
